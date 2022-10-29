@@ -13,7 +13,7 @@ Both the PyBank and PyPoll folders have:
 
 Below is a copy of the instructions, which are also written in each file
 
-##PyBank Instructions
+##PyBank Instructions##
 
  In this challenge, you are tasked with creating a Python script to analyze the financial records of your company.
  You will give a set of financial data called [budget_data.csv](PyBank/Resources/budget_data.csv).
@@ -46,7 +46,7 @@ Below is a copy of the instructions, which are also written in each file
  In addition, your final script should both print the analysis to the terminal and export a text file with the results.
 
 
-##PyPoll Instructions
+##PyPoll Instructions##
 
  In this challenge, you are tasked with helping a small, rural town modernize its vote counting process.
 
