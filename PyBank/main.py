@@ -33,3 +33,69 @@
 #
 ###########
 
+#Imports and Variable initialization
+import os, csv
+monthCount = 0
+totalChange = 0
+greatestIncrease = 0
+greatestIncreaseDate = "None"
+greatestDecrease = 0
+greatestDecreaseDate = "None"
+csvPath = './Resources/budget_data.csv'
+
+
+#Load file as a CSV object
+with open(csvPath, 'r') as csvFile:
+    csvReader = csv.reader(csvFile, delimiter=",")
+
+    #For each row in the CSV object, add to totals and check for new max/min
+    for currentRow in csvReader:
+        
+        #If checking the header row, use a null task to skip
+        if monthCount == 0:
+            print()
+        else:
+
+            totalChange = totalChange + int(currentRow[1])
+
+            if int(currentRow[1]) > int(greatestIncrease):
+                greatestIncrease = currentRow[1]
+                greatestIncreaseDate = currentRow[0]
+
+            if int(currentRow[1]) < int(greatestDecrease):
+                greatestDecrease = currentRow[1]
+                greatestDecreaseDate = currentRow[0]
+
+        #Every loop in for should iterate monthCount, which is currently used as the line count
+        monthCount += 1
+
+
+#After the loop, adjust monthCount to account for the header row
+monthCount -= 1
+
+
+#Export results to a text file
+with open('./analysis/Results.txt', 'w') as txtResults:
+    txtResults.write('Financial Analysis')
+    txtResults.write('\n')
+    txtResults.write('----------------------------')
+    txtResults.write('\n')
+    txtResults.write('Total Months: ' + str(monthCount))
+    txtResults.write('\n')
+    txtResults.write('Total: $' + str(totalChange))
+    txtResults.write('\n')
+    txtResults.write('Average Change: $' + str(round(totalChange / monthCount,2)))
+    txtResults.write('\n')
+    txtResults.write('Greatest Increase in Profits: ' + greatestIncreaseDate + ' ($' + str(greatestIncrease) + ')')
+    txtResults.write('\n')
+    txtResults.write('Greatest Decrease in Profits: ' + greatestDecreaseDate + ' ($' + str(greatestDecrease) + ')')
+
+
+#Write results to terminal
+print('Financial Analysis')
+print('----------------------------')
+print('Total Months: ' + str(monthCount))
+print('Total: $' + str(totalChange))
+print('Average Change: $' + str(round(totalChange / monthCount,2)))
+print('Greatest Increase in Profits: ' + greatestIncreaseDate + ' ($' + str(greatestIncrease) + ')')
+print('Greatest Decrease in Profits: ' + greatestDecreaseDate + ' ($' + str(greatestDecrease) + ')')
